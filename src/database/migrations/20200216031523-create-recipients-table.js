@@ -13,27 +13,27 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			rua: {
+			street: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			número: {
+			number: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			complemento: {
+			additional_information: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			estado: {
+			state: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			cidade: {
+			city: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			CEP: {
+			postal_code: {
 				type: Sequelize.STRING,
 				allowNull: false
 			},

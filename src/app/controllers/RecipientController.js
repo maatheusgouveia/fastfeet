@@ -4,31 +4,33 @@ import Recipient from "../models/Recipient";
 class RecipientController {
 	async store(req, res) {
 		const schema = Yup.object().shape({
-			rua: Yup.string().required(),
-			número: Yup.string().required(),
-			complemento: Yup.string().required(),
-			estado: Yup.string().required(),
-			cidade: Yup.string().required(),
-			CEP: Yup.string().required()
+			street: Yup.string().required(),
+			number: Yup.string().required(),
+			additional_information: Yup.string().required(),
+			state: Yup.string().required(),
+			city: Yup.string().required(),
+			postal_code: Yup.string().required()
 		});
 
 		if (!(await schema.isValid(req.body))) {
 			return res.status(400).json({ error: "Validation failed" });
 		}
 
-		Recipient.create(req.body);
+		const recipient = await Recipient.create(req.body);
+
+		return res.json(recipient);
 	}
 
 	async update(req, res) {
 		const { id } = req.params;
 
 		const schema = Yup.object().shape({
-			rua: Yup.string().required(),
-			número: Yup.string().required(),
-			complemento: Yup.string().required(),
-			estado: Yup.string().required(),
-			cidade: Yup.string().required(),
-			CEP: Yup.string().required()
+			street: Yup.string().required(),
+			number: Yup.string().required(),
+			additional_information: Yup.string().required(),
+			state: Yup.string().required(),
+			city: Yup.string().required(),
+			postal_code: Yup.string().required()
 		});
 
 		if (!(await schema.isValid(req.body))) {
@@ -38,15 +40,23 @@ class RecipientController {
 		const recipient = await Recipient.findByPk(id);
 
 		const {
-			rua,
-			número,
-			complemento,
-			estado,
-			cidade,
-			CEP
+			street,
+			number,
+			additional_information,
+			state,
+			city,
+			postal_code
 		} = await recipient.update(req.body);
 
-		return res.json({ id, rua, número, complemento, estado, cidade, CEP });
+		return res.json({
+			id,
+			street,
+			number,
+			additional_information,
+			state,
+			city,
+			postal_code
+		});
 	}
 }
 
